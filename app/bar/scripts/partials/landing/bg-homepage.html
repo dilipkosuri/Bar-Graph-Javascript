@@ -1,0 +1,24 @@
+<div ng-init="init()">
+	<div class="row titlepage-content add-margin title-color">Bar Graph Variations</div>
+	<div class="progress" ng-repeat="item in barData track by $index">
+		<div class="progress-bar" ng-class="{'progress-bar-danger':item.input > item.limit,'progress-bar-success':item.input <= item.limit}" role="progressbar" aria-valuenow="{{item.input}}"
+			 aria-valuemin="0" aria-valuemax="{{item.limit}}" style="width:{{item.width}}">
+			<span class="progress-value">{{item.input}}%</span>
+		</div>
+	</div>
+
+	<div class="dropdown-progress medium-12 titlepage-content add-margin subtitle-color">
+		<div class="progress-values">
+			Select the bar to change the value
+		</div>
+		<select ng-model="selectedBar" class="filter-select progress-style" ng-change="barChange()" data-value="{{item}}" ng-options="barData.indexOf(item) as item.name for item in barData"></select>
+	</div>
+	<div class="progress-values titlepage-content add-margin subtitle-color">
+		Apply the values to the changed bar
+	</div>
+	<div ng-repeat="btn in data.buttons track by $index" class="small-3 columns">
+		<button type="button" class="btn btn-info" ng-click="calculateProgress(btn)">{{btn}}</button>
+	</div>
+
+</>
+
