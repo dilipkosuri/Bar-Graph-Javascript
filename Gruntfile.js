@@ -217,6 +217,22 @@ module.exports = function(grunt) {
           }
         }
       },
+      test: {
+        options: {
+          port: 9055,
+          middleware: function (connect) {
+            return [
+              connect.static('.tmp'),
+              connect.static('test'),
+              connect().use(
+                  '/bower_components',
+                  connect.static('./bower_components')
+              ),
+              connect.static(appConfig.app)
+            ];
+          }
+        }
+      },
       dist: {
         options: {
           open: true,
@@ -699,6 +715,15 @@ module.exports = function(grunt) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
     grunt.task.run(['serve:' + target]);
   });
+
+  grunt.registerTask('test', [
+    'clean:server',
+    'wiredep',
+    'concurrent:test',
+    'postcss',
+    'connect:test',
+    'karma'
+  ]);
 
   grunt.registerTask('ensurePhantomJsPath', function () {
       process.env.PHANTOMJS_BIN = './node_modules/phantomjs-prebuilt/bin/phantomjs';

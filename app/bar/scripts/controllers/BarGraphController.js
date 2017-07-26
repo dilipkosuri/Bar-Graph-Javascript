@@ -5,14 +5,21 @@
 'use strict';
 
 
-function BarGraphController($scope, $state, $http, ServiceURL, $location, BGBarModel, HttpService) {
+function BarGraphController($scope, $http, ServiceURL, $location, BGBarModel, HttpService) {
 
+    $scope.data = {};
+
+    $scope.init = function(){
+        $scope.data = $scope.fetchResponse();
+    };
+
+    //function to redirect to homepage when showbargraph is clicked or tapped from welcomepage or landing page
     $scope.navigateToHomePage = function(){
 
         $location.path("homepage");
     };
 
-    function fetchResponse(){
+    $scope.fetchResponse = function(){
         $scope.data = {};
         $scope.fetchResponse = HttpService.load(ServiceURL.getBarResponse)
             .then(function (response) {
@@ -23,10 +30,6 @@ function BarGraphController($scope, $state, $http, ServiceURL, $location, BGBarM
                 alert("There is no response from the server. Please try again!")
             });
         return $scope.data;
-    }
-
-    $scope.init = function(){
-        $scope.data = fetchResponse();
     };
 
     $scope.calculateProgress = function(val){
@@ -34,9 +37,5 @@ function BarGraphController($scope, $state, $http, ServiceURL, $location, BGBarM
             $scope.data.bars[$scope.selectedBar] = $scope.data.bars[$scope.selectedBar] + val;
             $scope.barData = BGBarModel.getAggregatedData($scope.data);
         }
-    };
-
-    $scope.barChange = function(){
-        console.log("hrg",$scope.selectedBar);
     };
 }
