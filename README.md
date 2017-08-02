@@ -13,11 +13,15 @@ Please watch the demo by clicking on the link below:
 Steps to Run the application:
 
 Step 1: Install the dependencies
+        ```
         npm install
         bower install
-        
+        ```
 Step 2: Run the application
+        ```
         grunt serve:bar --env=apimock
-        
+        ```
 Step 3: To run the tests
+        ```
         grunt test
+        ```
