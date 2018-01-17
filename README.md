@@ -16,8 +16,18 @@
         
         > grunt test
         
+ 
+ Note: 
+ 
+ To install Ruby in Windows: https://rubyinstaller.org/downloads/ --> Choose the latest version.
+ Once the Ruby is installed, to check if the installation is successfull, run to check: ruby -v
 
-
+ To install compass and sass, run the following commands:
+ gem install compass & gem install sass
+ 
+ To install grunt in mac/windows: npm install -g grunt / npm install -g grunt-cli 
+ 
+ 
 Screenshots:
 
 Welcome page or landing page:
